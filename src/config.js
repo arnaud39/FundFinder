@@ -3,10 +3,12 @@ import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
 import LearningOptions from "./components/LearningOptions/LearningOptions";
 import WelcomeUser from "./components/Welcome/Welcome";
+import Additional from "./components/AdditionalInfos/Additional";
+import WhatPurpose from "./components/WhatPurpose/WhatPurpose";
 import LinkList from "./components/LinkList/LinkList";
 
 
-const welcomeMessage = "Hi, I am fundFinder, powered by artificial intelligence. I will guide you to success by helping you with your next loan. Feel free to ask any question";
+const welcomeMessage = "Hi, I am Fundfinder, powered by artificial intelligence. I will guide you to success by helping you with your next loan. Feel free to ask any question";
 
 const config = { 
   botName: "fundFinder",
@@ -31,6 +33,14 @@ const config = {
     {
       widgetName: "welcomeUser",
      widgetFunc: (props) => <WelcomeUser {...props} />,
+    },
+    {
+      widgetName: "additionalInfo",
+     widgetFunc: (props) => <Additional {...props} />,
+    },
+    {
+      widgetName: "whatPurpose",
+     widgetFunc: (props) => <WhatPurpose {...props} />,
     },
     {
       widgetName: "javascriptLinks",

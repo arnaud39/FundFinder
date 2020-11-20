@@ -6,43 +6,50 @@ class ActionProvider {
     this.createClientMessage = createClientMessage;
     this.messageList = {
       additionalInfo: "I am designed to help humans.",
-      whereInvesting: "Great, friend. Where",
+      whatPurpose: "Great, friend. For which purpose would you like to take out a loan?",
       nearestBank: "According to my data, you are at a short distance away these banks.",
       nearestBankNext: "With whom would you like to get in touch afterwards ?",
       amoutOfMoney: "Amazing ! Now, let's go down to business. Can you tell me how much money you need?",
       tooLow: "Considering your needs, I can redirect you to an instant loan offer.",
       socialConnect: "I need to gather some infos. To faster the process, you can connect with these social media. I'll get the information I need if you agree",
       errorSocialConnect: "I am sorry, there was an error. Could you connect again ?",
-      sucessCheck: "It is all good! Let's check together that the information I've retrieved is the right one."
+      sucessCheck: "It is all good! Let's check together that the information I've retrieved is the right one.",
     
     }
-    this.widgetsList = {
-      test: "test"
+    this.widgetList= {
+      additionalInfo: "additionalInfo",
+      whatPurpose: "whatPurpose",
+      nearestBank: "nearestBank",
+      nearestBankNext: "nearestBankNext",
+      amoutOfMoney: "amoutOfMoney",
+      tooLow: "tooLow",
+      socialConnect: "socialConnect",
+      errorSocialConnect: "errorSocialConnect",
+      sucessCheck: "sucessCheck",
     }
 
-    this.push = this.objectMap(this.messageList, this.mapFunction);
+    this.push = {};
+    for (var key in this.messageList){
+      this.push[key] = this.mapFunction(key,this.messageList[key]);
+    }
   }
 
 
-  objectMap = (obj, fn) =>
-  Object.fromEntries(
-    Object.entries(obj).map(
-      ([k, v], i) => [k, fn(v, k, i)]
-    )
-  )
-
-  mapFunction = el => () => {
-    let greetingMessage = this.createChatBotMessage(el);
+  mapFunction = (key,el) => () => {
+    //retrieve widget name
+    let greetingMessage;
+    if (this.widgetList[key]){
+      greetingMessage = this.createChatBotMessage(el, {
+        widget: this.widgetList[key],
+      });
+    }
+    else {
+      greetingMessage = this.createChatBotMessage(el);
+    }
     this.updateChatbotState(greetingMessage);
   }
 
 
-
-  /*push = (messageTo) => {
-    console.log(messageTo);
-    const greetingMessage = this.createChatBotMessage(messageTo);
-    this.updateChatbotState(greetingMessage);
-  }*/
   test() {
     const mst = this.createChatBotMessage(this.messageList.nearestBank, {
       widget: "learningOptions",

@@ -5,8 +5,8 @@ import "./Welcome.css";
 
 const WelcomeUser = (props) => {
   const options = [
-    { text: "Hi Fundfinder !", handler: props.actionProvider.push.additionalInfo, id: 1 },
-    { text: "Tell me more", handler: () => {}, id: 2 },
+    { text: "Hi Fundfinder !", handler: props.actionProvider.push.whatPurpose, id: 1 },
+    { text: "Tell me more", handler: props.actionProvider.push.additionalInfo, id: 2 },
   ];
 
   const optionsMarkup = options.map((option) => (
